@@ -1,6 +1,7 @@
 <?php
 
 namespace TecStore\Http\Controllers;
+
 use Auth;
 use Session;
 use Redirect;   
@@ -119,10 +120,10 @@ class productosController extends Controller
     public function update(Request $request, $id)
     {
         $editar=productos::find($id);
-        $editar->id=$id;
-        $editar->fill($request->all());
-        $editar->status='1';
-        $editar->id_usuario=Auth::id();
+        $editar->nombre = $request->get('nom_producto');
+        $editar->descripcion = $request->get('descripcion');
+        $editar->cantidad = $request->get('cantidad');
+        $editar->precio = $request->get('precio');
         $editar->save();
         return Redirect::to('perfil_Usuario');
     }
