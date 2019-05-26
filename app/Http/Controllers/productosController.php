@@ -48,6 +48,7 @@ class productosController extends Controller
      */
     public function store(Request $request)
     {
+
         $producto = productos::create([
            'nombre' => $request['nom_producto'],
            'descripcion' => $request['descripcion'],
@@ -58,6 +59,8 @@ class productosController extends Controller
         ]);
         
         $this->img($request,$producto->id);
+        return redirect('/perfil_Usuario')->with('message','store');
+        
     }
 
     public function img(Request $request,$id){
@@ -75,10 +78,10 @@ class productosController extends Controller
             'url' => $nombre,
             'alt' => $request['nom_producto'],
         ]);
-    
-        Session::flash('message-success','Producto registrado correctamente');
-        return Redirect::to('/perfil_Usuario');
+
+        
     }
+
     /* 
      * 
      * Display the specified resource.
@@ -86,9 +89,10 @@ class productosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($nombre)
     {
-        //
+        $nombre_p = productos::where('nombre','=',$nombre);
+        return view('perfil_Usuario.update',compact('nombre_p'));
     }
 
     /** 
@@ -98,10 +102,11 @@ class productosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {        
     //Este causa el problema 
-        $edit = productos::find($id);
-        return view('perfil_Usuario.perfil',['edit'=>$edit]);
+    $producto = productos::where('id',$id)->get();
+    $item = productos::where('id_usuario',Auth::user()->id)->get();
+    return view('perfil_Usuario.update',['producto'=>$producto,'item'=>$item]);   
     }
 
     /**
@@ -113,7 +118,13 @@ class productosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $editar=productos::find($id);
+        $editar->id=$id;
+        $editar->fill($request->all());
+        $editar->status='1';
+        $editar->id_usuario=Auth::id();
+        $editar->save();
+        return Redirect::to('perfil_Usuario');
     }
 
     /**

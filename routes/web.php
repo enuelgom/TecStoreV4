@@ -24,6 +24,8 @@ Route::get('/', 'productosController@index');
 
 Route::get('perfil_Usuario','productosController@perfil');
 
+Route::get('producto/{parameters}','productosController@edit');
+
 Route::resource('producto','productosController');
 
 Route::resource('imagen','imagenController');

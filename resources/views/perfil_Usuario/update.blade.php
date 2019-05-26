@@ -1,3 +1,4 @@
+
 @extends('diseño.navbar')
 
 @section('title','Nombre_usuario')
@@ -34,10 +35,32 @@
     <div class="col-10 col-sm-4" id="perfil" style="width: 20rem; margin-top: 40px;">
         <h5>Ahora puedes registrar tus productos</h5>
         
-                   @if (\Request::is('perfil_Usuario'))
-                    @include('perfil_Usuario.create')
-                   @endif
+        @foreach ($producto as $data)
+        {!! Form::model($producto,['route'=>['producto.update',$data->id], 'method'=>'PUT', 'files' => true, 'role' => 'form']) !!}
+        <div class="form-group">    
+            <input type="text" name="nom_producto" value="{{ $data->nombre }}" placeholder="Name" class="form-control"  required>
+        </div>
         
+        <div class="form-group">    
+            <input type="text" style="height: 7rem;" value="{{ $data->descripcion }}" name="descripcion" placeholder="Description" class="form-control" required>
+        </div>
+        
+        <div class="form-group">    
+            <input type="text" name="cantidad" value="{{ $data->cantidad }}" placeholder="Precio" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <input type="text" name="precio" value="{{ $data->precio }}" placeholder="Cantidad" class="form-control" required>
+        </div>
+        
+        <h5>Selecciona imagenes del producto</h5>
+        
+        <div class="fallback dropzone" class="" id="my-awesome-dropzone">
+            <input type="file" name="file" multiple>
+        </div>
+        {!! form::submit('registrar',['class'=>'btn btn-success']) !!}
+        {!! Form::close() !!}
+        @endforeach
     </div>
      
 <!--Productos previamente publicados por el usuario-->
