@@ -3,6 +3,7 @@
 namespace TecStore\Http\Controllers;
 
 use Auth;
+use DB;
 use Session;
 use Redirect;   
 use TecStore\imagen;
@@ -19,13 +20,22 @@ class productosController extends Controller
      */
     public function index()
     {
-        $data = productos::all();
-        return view('index',compact('data'));
+        //$data = productos::all();
+        //$img = imagen::all();
+        //return view('index',['data'=>$data,'img'=>$img]);
 
+        $data = DB::table('productos')->join('imagen','productos.id','imagen.id_producto')->select('productos.*','imagen.*')->get();
+        return view('index',['data'=>$data]);
+        
     }
     public function perfil(){
-        $item = productos::where('id_usuario',Auth::user()->id)->get();
+        
+        $item=DB::table('productos')->join('imagen','productos.id','imagen.id_producto')->where('productos.id_usuario','=',auth::user()->id)->select('productos.*','imagen.*')->get();
+
+        
+        //$item = productos::where('id_usuario',Auth::user()->id)->get();
         return view('perfil_Usuario.perfil',compact('item'));
+
     }
 
     public function showImg(){
@@ -104,9 +114,11 @@ class productosController extends Controller
      */
     public function edit($id)
     {        
-    //Este causa el problema 
+    //Este causa el problema
+
     $producto = productos::where('id',$id)->get();
-    $item = productos::where('id_usuario',Auth::user()->id)->get();
+    $item=DB::table('productos')->join('imagen','productos.id','imagen.id_producto')->where('productos.id_usuario','=',auth::user()->id)->select('productos.*','imagen.*')->get();
+    //return $item;
     return view('perfil_Usuario.update',['producto'=>$producto,'item'=>$item]);   
     }
 
@@ -136,6 +148,6 @@ class productosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Redirect::to('perfil_Usuario');
     }
 }

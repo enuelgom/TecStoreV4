@@ -8,11 +8,11 @@
      </div>
                   
     <div class="form-group">    
-        <input type="text" name="cantidad" placeholder="Precio" class="form-control" required>
+        <input type="text" name="cantidad" placeholder="Cantidad" class="form-control" required>
     </div>
 
     <div class="form-group">
-        <input type="text" name="precio" placeholder="Cantidad" class="form-control" required>
+        <input type="text" name="precio" placeholder="Precio" class="form-control" required>
     </div>
 
     <h5>Selecciona imagenes del producto</h5>

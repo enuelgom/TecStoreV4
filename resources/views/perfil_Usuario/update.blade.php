@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-10 col-sm-4">
             <div class=" card text-center" style="width: 20rem; margin-top: 50px;">
-                <img class="card-img-top rounded-circle mx-auto d-block" style="height: 200px; width: 200px; background-color: #EFEFEF;" src="images/{{  Auth::user()->avatar }}" alt="">
+                <img class="card-img-top rounded-circle mx-auto d-block" style="height: 200px; width: 200px; background-color: #EFEFEF;" src="/images/{{  Auth::user()->avatar }}" alt="">
                 <div class="card-body">
 
                     <h5 class="card-title">{{ Auth::user()->nombre }}</h5>
@@ -73,7 +73,7 @@
         @foreach ($item as $dato)
         <div class="col-sm">
             <div class="card text-center" style="width: 18rem; margin-top: 40px;">
-                    <img class="card-img-top rounded-circle mx-auto d-block" style="height: 200px; width: 200px; background-color: #EFEFEF;"  alt="">
+                    <img class="card-img-top rounded-circle mx-auto d-block" style="height: 200px; width: 200px; background-color: #EFEFEF;" src="/productos/{{ $dato->url }}"  alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{ $dato->nombre }}</h5>
                     <p class="card-text"><strong>Precio: ${{ $dato->precio }}</strong></p>

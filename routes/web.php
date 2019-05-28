@@ -25,7 +25,8 @@ Route::get('/', 'productosController@index');
 Route::get('perfil_Usuario','productosController@perfil');
 
 Route::get('producto/{parameters}','productosController@edit');
-
+Route::get('producto/{parameters}/editar','productosController@edit');
+Route::get('producto/{parameters}/borrar','productosController@destroy');
 Route::resource('producto','productosController');
 
 Route::resource('imagen','imagenController');

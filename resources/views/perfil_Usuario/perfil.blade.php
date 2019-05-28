@@ -50,12 +50,14 @@
         @foreach ($item as $dato)
         <div class="col-sm">
             <div class="card text-center" style="width: 18rem; margin-top: 40px;">
-                    <img class="card-img-top rounded-circle mx-auto d-block" style="height: 200px; width: 200px; background-color: #EFEFEF;"  alt="">
+                    <img class="card-img-top rounded-circle mx-auto d-block" style="height: 200px; width: 200px; background-color: #EFEFEF;" src="productos/{{ $dato->url }}" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{ $dato->nombre }}</h5>
                     <p class="card-text"><strong>Precio: ${{ $dato->precio }}</strong></p>
                     <p class="card-text"><strong>Descripción: {{ $dato->descripcion }}</strong></p>
-                    <a href="/producto/{{ $dato->id  }}" class="btn btn-primary">editar</a>
+                    <a href="/producto/{{ $dato->id  }}/editar" class="btn btn-primary">editar</a>
+                    <a href="/producto/{{ $dato->id }}/borrar" class="btn btn-danger"></a>
+
                     {{-- comment
                         {!! link_to_route('producto.edit',$title='Editar', $parameters=$dato->id, $attributes=['class'=>'btn btn-success']) !!}
                         {!! link_to_route('producto.destroy', $title='Eliminar', $parameters=$dato->id, $attributes=['class'=>'btn btn-danger']) !!}
